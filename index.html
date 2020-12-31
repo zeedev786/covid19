@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID_DATA</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="example.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="js/myscript.js"></script>
+
+</head>
+
+<body ng-app="CovidApp" ng-controller="CovidCtrl">
+    <div class="container">
+        <div class="jumbotron py-3">
+            <h1 class="text-center pt-3">{{title}}</h1>
+            <h4 class="text-center mt-1">WORLD WIDE STATUS</h3>
+
+                <accordion close-others="oneAtATime">
+                    <accordion-group is-open="isopen">
+                        <accordion-heading ng-click="isopen=!isopen">
+                            <div>
+                                PIE CHART
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-   chevron-down': isopen, 'glyphicon-chevron-right': !isopen}">
+                           </i>
+                            </div>
+                        </accordion-heading>
+                        <div id="allData"></div>
+                    </accordion-group>
+                </accordion>
+
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body">
+                                <h3>CONFIRMED CASES</h3>
+                                <h3>{{allData.confirmed.value}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h3>RECOVERED CASES</h3>
+                                <h3>{{allData.recovered.value}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                <h3>DEATH CASES</h3>
+                                <h3>{{allData.deaths.value}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end data -->
+
+                <input type="text" name="" class="form-control mt-4" placeholder="ENTER COUNTRY" ng-model="countryName" ng-change="getCountryData()">
+
+
+                <!-- countryDATA -->
+                <h1 class="text-center mt-4 text-uppercase" ng-if="countryName">{{countryName}} status</h1>
+                <div class="row text-center mt-4" ng-if="countryName">
+                    <div class="col-md-4">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body">
+                                <h3>CONFIRMED CASES</h3>
+                                <h3>{{countryData.confirmed.value}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h3>RECOVERED CASES</h3>
+                                <h3>{{countryData.recovered.value}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                <h3>DEATH CASES</h3>
+                                <h3>{{countryData.deaths.value}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- country Data end -->
+        </div>
+        <div ng-if="countryName">
+            <accordion close-others="oneAtATime">
+                <accordion-group is-open="isopen">
+                    <accordion-heading ng-click="isopen=!isopen">
+                        <div>
+                            PIE CHART
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-   chevron-down': isopen, 'glyphicon-chevron-right': !isopen}">
+                   </i>
+                        </div>
+                    </accordion-heading>
+                    <div id="container"></div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+</body>
+
+</html>
